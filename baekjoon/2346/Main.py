@@ -1,7 +1,18 @@
 from collections import deque
 from operator import index
 
-dq = deque([1,2,3,4,5])
-dq.rotate(-1)
+N = int(input())
+dq = deque(enumerate(map(int,input().split(" ")), start=1))
+ans = []
 
-print(dq)
+while dq:
+    index, cycle = dq.popleft()
+    ans.append(index)
+    if cycle>0:
+        dq.rotate(-(cycle-1))
+    else:
+        dq.rotate(-cycle)
+
+for i in ans:
+    print(i, end=" ")
+
