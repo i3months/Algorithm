@@ -24,14 +24,19 @@ import java.util.*;
 
     }
     static void prime_check(int n){
+
+      if(n<2){
+        return;
+      }
+
       prime = new boolean[n+1];
       prime[0] = true;
       prime[1] = true;
 
      
 
-     for(int i= 2; i< Math.sqrt(n); i++){
-       if(prime[i] == true){
+     for(int i= 2; i<= Math.sqrt(n); i++){
+       if(prime[i] == true){  
          continue;
        }
 
