@@ -28,7 +28,7 @@ import java.io.*;
                     int temp = Math.min(A-j, C-k);
                     ans = Math.max(ans, AB*j+BC*k+CA*temp); 
                     // j == AB.num k == BC.num temp == CA.num .... 
-                    // greedy would be good       
+                    // greedy would be good   a    
                 }
             }
 
