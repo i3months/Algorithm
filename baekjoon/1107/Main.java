@@ -11,15 +11,18 @@ public class Main {
 
 		boolean[] broken = new boolean[10];
 
-		StringTokenizer st = new StringTokenizer(br.readLine());
-
-		for(int i=0; i<M; i++){
-			broken[Integer.parseInt(st.nextToken())] = true;
+		if(M != 0){
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			for(int i=0; i<M; i++){
+				broken[Integer.parseInt(st.nextToken())] = true;
+			}
 		}
+		
+		
 
 		int min = Math.abs(N - 100);
 
-		for(int i=0; i<1000000; i++){
+		for(int i=0; i<1_000_002; i++){
 			String str = String.valueOf(i);
 			int len = str.length();
 
@@ -36,7 +39,9 @@ public class Main {
 				int temp = Math.abs(N - i) + len;
 				min = Math.min(min, temp);
 			}
+
 		}
+
 		System.out.println(min);
 		
 
