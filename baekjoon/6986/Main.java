@@ -25,9 +25,7 @@
 					sum = sum + arr[i];
 				}
 
-				double jeol = sum / (double)(N - K - K);
-
-				jeol = Math.round(jeol * 100.0) / 100.0;
+				double jeol = sum / (double)(N - K - K);				
 
 				for(int i=0; i<K; i++){
 					arr[i] = arr[K];
@@ -43,11 +41,11 @@
 					sum2 = sum2 + arr[i];
 				}
 
-				double bo = sum2 / (double)N;
+				double bo = sum2 / (double)N;				
 
-				bo = Math.round(bo * 100.0) / 100.0;
-
-				System.out.println(jeol + "\n" + bo);
+				System.out.println(String.format("%.2f", jeol + 1e-8));
+				System.out.println(String.format("%.2f", bo + 1e-8));
+				//System.out.println(jeol + "\n" + bo);
 
 
 		}
