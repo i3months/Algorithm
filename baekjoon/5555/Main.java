@@ -26,6 +26,14 @@ public class Main {
                         String cmp = str.substring(j, j + target.length());
                         if(cmp.equals(target)){
                             cnt++;
+                            break;
+                        }
+                    }else{
+                        String cmp = str.substring(j, str.length());
+                        cmp = cmp + str.substring(0, j + target.length() - (str.length()));
+                        if(cmp.equals(target)){
+                            cnt++;
+                            break;
                         }
                     }
                 }
