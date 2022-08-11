@@ -3,6 +3,9 @@ import java.io.*;
 import java.math.*;
 
 public class Main {
+
+    static int count;
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -14,56 +17,31 @@ public class Main {
 
         for(int i=0; i<N + 1; i++){
             arr[i] = Integer.parseInt(st.nextToken());
-        }
+        }                     
+        
+        int degree = N;        
 
-        int cnt = 1;        
+        int x = 1;
 
-        for(int i=N-1; i>=0; i--){
-            if(arr[i] != 0){                
-                break;
+        solve(degree, arr, x);
+        
+    }
+
+    static void solve(int degree, int[] arr, int x){
+        int value = arr[0];
+        int cost = -1;
+
+        for(int i=1; i<degree + 1; i++){
+            value = value * x + arr[i];
+            cost += 2;
+
+            if(arr[i] != 0){
+                cost += 1 + String.valueOf(arr[i]).length();
             }
-            cnt++;
         }
 
-        int ans = 0;
+        cost++;
 
-        for(int i=0; i<N; i++){
-            if(arr[i] == 1){
-                int tmp = N - i - cnt;
-
-                if(tmp == 0){
-                    ans++;
-                    ans++;
-                }else{
-                    ans += (tmp * 2)  - 1;
-                    ans++;
-                }
-                
-                
-            }else if(arr[i] != 0){
-                ans += String.valueOf(arr[i]).length() + 1;
-                int tmp = N - i - cnt;
-
-                if(tmp == 0){                    
-
-                }else{
-                    ans += (tmp * 2)  - 1;
-                    ans++;
-                }                
-            }                                    
-        }
-
-        ans += (2 * cnt) - 1;
-
-        if(arr[N] != 0){
-            ans += String.valueOf(arr[N]).length() + 1;
-        }
-
-        System.out.println(ans + 1);
-
-        
-
-        
-        
+        System.out.println(cost);
     }
 }
