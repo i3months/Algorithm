@@ -57,7 +57,7 @@ public class Main {
 
             if(map[r][c] < map[nextR][nextC]){
                 dp[r][c] = Math.max(dp[r][c], bfs(nextR,nextC) + 1);
-                bfs(nextR,nextC);
+                // bfs(nextR,nextC);
             }
         }
 
