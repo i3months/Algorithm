@@ -25,6 +25,7 @@ public class Main {
             if(sum + 1 < arr[i]){
                 System.out.println(sum + 1);
                 return;
+                return;
             }
 
             sum += arr[i];
