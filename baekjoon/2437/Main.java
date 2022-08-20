@@ -24,8 +24,7 @@ public class Main {
         for(int i=0; i<N; i++){
             if(sum + 1 < arr[i]){
                 System.out.println(sum + 1);
-                return;
-                return;
+                return;                
             }
 
             sum += arr[i];
