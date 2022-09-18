@@ -7,6 +7,7 @@ public class Main {
 	static int[][] map;	
 	static int[][] visit;
 	static boolean[] visitVirus;
+	static int fillCnt = 0;
 
 	static int[] dr = {-1,1,0,0};
 	static int[] dc = {0,0,-1,1};
@@ -34,7 +35,11 @@ public class Main {
 
 				if(map[i][j] == 2){
 					virusAble.add(new Locate(i, j));
-				}				
+				}
+				
+				if(map[i][j] == 0){
+					fillCnt++;
+				}
 			}
 		}
 
@@ -71,8 +76,35 @@ public class Main {
 				q.add(new Locate(virusArr[i].r, virusArr[i].c));
 			}
 
+			int cnt = 0;
+
 			while(!q.isEmpty()){
 				Locate cur = q.poll();
+
+				//
+				if(cnt == fillCnt){
+					min = Math.min(min, tmpMax);
+					break;
+				}
+
+				//
+				// boolean flag = false;
+
+				// for(int i=1; i<N+1; i++){
+				// 	for(int j=1; j<N+1; j++){
+				// 		if(map[i][j] != 1){
+				// 			if(mapCopy[i][j] == 0){
+				// 				flag = true;
+				// 			}
+				// 		}
+				// 	}
+				// }
+	
+				// if(!flag){
+				// 	min = Math.min(min, tmpMax);		
+				// 	break;
+				// } 
+				//
 
 				for(int i=0; i<4; i++){
 					int nextR = cur.r + dr[i];
@@ -86,15 +118,12 @@ public class Main {
 						continue;
 					}
 
-					if(mapCopy[nextR][nextC] == 1){
+					if(mapCopy[nextR][nextC] == 1 || mapCopy[nextR][nextC] == 3){
 						continue;
 					}
 
-					if(mapCopy[nextR][nextC] == 2){
-						mapCopy[nextR][nextC] = 3;
-						visit[nextR][nextC] = visit[cur.r][cur.c];
-						q.add(new Locate(nextR, nextC));
-						continue;
+					if(mapCopy[nextR][nextC] == 0){
+						cnt++;
 					}
 
 					mapCopy[nextR][nextC] = 3;
@@ -103,20 +132,7 @@ public class Main {
 					q.add(new Locate(nextR,nextC));
 				}
 			}
-
-			boolean flag = false;
-
-			for(int i=1; i<N+1; i++){
-				for(int j=1; j<N+1; j++){
-					if(map[i][j] != 1){
-						if(mapCopy[i][j] == 0){
-							flag = true;
-						}
-					}
-				}
-			}
-
-			if(!flag) min = Math.min(min, tmpMax);						
+				
 
 			// for(int i=1; i<M+1; i++){
 			// 	System.out.println(virusArr[i].r + " " + virusArr[i].c);
