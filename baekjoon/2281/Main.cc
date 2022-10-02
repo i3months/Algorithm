@@ -1,0 +1,2 @@
+#include <iostream>
+int dp[1001];int arr[1001];int INF = 987654321;int N, M;int solve(int idx){if(dp[idx] != INF) return dp[idx];int remain = M- arr[idx];for(int i=idx+1; i<N+1; i++){if(remain<0) break;if(i==N){dp[idx]=0; break;}dp[idx]=std::min(dp[idx],remain*remain+solve(i));remain-=arr[i]+1;}return dp[idx];}int main(){std::cin >> N;std::cin >> M;for(int i=0; i<N; i++) std::cin >> arr[i];for(int i=0; i<N; i++) dp[i] = INF;std::cout << solve(0);return 0;}
