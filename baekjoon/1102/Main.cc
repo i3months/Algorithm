@@ -67,8 +67,7 @@ int main() {
 		int tmp = pow(2, idx);
 		status2 += tmp;  								
 	}
-
-	// cout << status2 << endl;	
+	
 
 	memset(dp, -1, sizeof(dp));
 	int ans = INF;
