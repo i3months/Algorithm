@@ -29,7 +29,7 @@ int main() {
 
 		for(int i=1; i<N+1; i++) {
 			cin >> arr[i];	
-		}
+		}//
 
 		sort(arr, arr+N+1, greater<int>());		
 		
