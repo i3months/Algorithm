@@ -1,3 +1,3 @@
 ﻿# ProblemSolvingHub
 
-with Java / Python  / C / C++
+Java C++ C
