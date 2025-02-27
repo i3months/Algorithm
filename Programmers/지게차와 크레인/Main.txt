@@ -1,0 +1,95 @@
+import java.util.*;
+
+class Solution {
+    
+    static int[] dx = {-1,1,0,0};
+    static int[] dy = {0,0,-1,1};
+    static int n;
+    static int m;
+    
+    public int solution(String[] storage, String[] requests) {
+        n = storage.length;
+        m = storage[0].length();
+        
+        int[][] map = new int[n+2][m+2];        
+        
+        for(int i=0; i<n+2; i++) Arrays.fill(map[i], -2);
+        
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<m; j++) {
+                map[i+1][j+1] = storage[i].charAt(j) - 'A';
+            }
+        }
+        
+        for(String request : requests) {
+            int target = request.charAt(0) - 'A';
+            
+            // 바로제거 
+            if (request.length() == 2) {
+                for (int i=1; i<n+1; i++) {
+                    for(int j=1; j<m+1; j++) {
+                        if (map[i][j] == target) map[i][j] = -1;
+                    }
+                }
+            }
+            
+            // 그래프탐색 
+            if (request.length() == 1) {
+                List<Locate> removeList = new ArrayList<>();
+                boolean[][] visited = new boolean[n+2][m+2];                                            
+                Queue<Locate> q = new LinkedList<>();
+                q.add(new Locate(0,0));
+                
+                while(!q.isEmpty()) {
+                    Locate cur = q.poll();
+                    for(int i=0; i<4; i++) {
+                        int nextX = cur.x + dx[i];
+                        int nextY = cur.y + dy[i];
+                        
+                        if (!isValid(nextX, nextY) || visited[nextX][nextY]) continue;
+                        
+                        visited[nextX][nextY] = true;                                                   
+                        
+                        if (map[nextX][nextY] == -1) {
+                            q.add(new Locate(nextX, nextY));                            
+                        }
+                        
+                        if (nextX == 0 || nextX == n+1 || nextY == 0 || nextY == m+1) {
+                            q.add(new Locate(nextX, nextY));                            
+                        }
+                        
+                        if (map[nextX][nextY] == target) {
+                            removeList.add(new Locate(nextX, nextY));                     
+                        }
+                    }                                        
+                }
+                
+                for(Locate locate : removeList) {
+                    map[locate.x][locate.y] = -1;
+                }
+                
+            }
+        }
+        int ans = 0;
+        for(int i=1; i<=n; i++) {
+            for(int j=1; j<=m;j ++) {
+                if (map[i][j] != -1) ans++;
+            }
+        }
+        
+        return ans;
+    }
+    
+     public static boolean isValid(int nx, int ny){
+        if(0 <= nx && 0 <= ny && nx <= n+1 && ny <= m+1) return true;
+        return false;
+    }
+}
+
+class Locate {
+    int x, y;
+    Locate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
