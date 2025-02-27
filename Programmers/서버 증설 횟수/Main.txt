@@ -1,0 +1,44 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] players, int m, int k) {
+        
+        PriorityQueue<Server> q = new PriorityQueue<>((a, b) -> a.end - b.end);
+        
+        int ans = 0;
+        int curServer = 0;
+        int idx = 0;
+        
+        for (int player : players) {
+            
+            while (true) {
+                if (q.isEmpty()) break;
+                if (q.peek().end >= idx) break;
+                
+                curServer -= q.poll().cnt;
+            }                  
+            
+            int lackCnt = Math.max(0, (player / m) - curServer);
+            
+            if (lackCnt > 0) {
+                q.add(new Server(lackCnt, idx + k - 1));
+                curServer += lackCnt;
+                ans += lackCnt;
+            }
+            idx++;
+        }
+        
+        
+        return ans;
+    }
+}
+
+class Server {
+    int cnt;
+    int end;
+    
+    Server(int cnt, int end) {
+        this.cnt = cnt;
+        this.end = end;
+    }
+}
